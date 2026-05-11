@@ -2,6 +2,8 @@
 
 Premium AI social media content pipeline SaaS built as a standalone React, TypeScript, Vite, Tailwind, Node API, Supabase-ready, Gemini-integrated project.
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+
 ## Features
 
 - Email/password signup, login, logout, session persistence, protected dashboard routes.
