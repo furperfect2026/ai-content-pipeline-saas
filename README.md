@@ -90,6 +90,21 @@ npm run lint
 npm run build
 ```
 
+## Free Deployment
+
+The app can deploy as one free Render web service. Express serves both `/api/*` and the built React app from `dist`.
+
+1. Push this repo to GitHub.
+2. Go to [Render](https://render.com), choose **New > Blueprint**, and connect this repository.
+3. Render will read `render.yaml`.
+4. Keep the free plan selected.
+5. Add optional secrets:
+   - `GEMINI_API_KEY` for real Gemini generation.
+   - `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` for Supabase Auth/database.
+6. Deploy.
+
+Without Gemini and Supabase keys, the deployed app still works in mock AI mode with local JWT auth. For persistent production data, configure Supabase.
+
 ## Git
 
 This folder is standalone and ready to initialize as its own repository:

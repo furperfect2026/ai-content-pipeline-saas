@@ -1,4 +1,6 @@
 import "dotenv/config";
+import fs from "node:fs";
+import path from "node:path";
 import cors from "cors";
 import express, { type NextFunction, type Request, type Response } from "express";
 import helmet from "helmet";
@@ -24,6 +26,16 @@ app.use("/api/ai", aiRouter);
 app.use("/api/content", contentRouter);
 app.use("/api/schedule", scheduleRouter);
 app.use("/api/export", exportRouter);
+
+const clientDist = path.join(process.cwd(), "dist");
+const clientIndex = path.join(clientDist, "index.html");
+
+if (fs.existsSync(clientIndex)) {
+  app.use(express.static(clientDist));
+  app.get(/^(?!\/api).*/, (_req, res) => {
+    res.sendFile(clientIndex);
+  });
+}
 
 app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
   if (error instanceof ZodError) return res.status(400).json({ error: error.errors[0]?.message ?? "Invalid request" });
